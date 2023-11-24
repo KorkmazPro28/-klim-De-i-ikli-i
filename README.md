@@ -1,99 +1,38 @@
-## Projemin türü:
-> iklim değişikliği ile ilgili site
+# İklim Değişikliğine Dur!
 
-## Kullanacağım kütüphaneler:
-- Flask
-- Flask_SQLalchemy
-- Requests
+![Proje İklim Değişikliği](calistirma-resmi.png)
 
-## İşe yarayabilecek referanslar:
-- Elimde işime yarayacak bir sürü kod var.
+Bu proje, iklim değişikliğinin zararlarını anlatmayı amaçlayan bir bilinçlendirme girişimidir.
 
-- Bir tanesi :
+## Kurulum
 
-from flask import Flask , render_template , request ,redirect ,url_for,flash
-from flask_sqlalchemy import SQLAlchemy
-import os
-from datetime import datetime
-from requests import options
-import tkinter as tk
-import ctypes  # An included library with Python install.
+Projeyi yerel ortamınıza kurmak için aşağıdaki adımları takip edebilirsiniz:
 
-DB_NAME = "site.db"
+1. Projeyi klonlayın: `git clone https://github.com/kullaniciadi/iklim-degisikligi.git`
+2. Gerekli kütüphaneleri yükleyin: `pip install Flask,Flask_SQLalchemy,requests`
+3. Projeyi çalıştırın: `main.py`
 
-app: Flask = Flask(__name__)
-app.config["SECRET_KEY"] = "ıukhhgkjjgh"
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
-db = SQLAlchemy(app)
-app.app_context().push()
+## Projeyi Çalıştırma
 
-class Users(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    surname = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-    dreams = db.relationship("Dreams", backref="dreamer")
+![Proje Çalıştırma Ekranı](calistirma-ekrani.png)
 
-class Dreams(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    dream = db.Column(db.String(300), nullable=False)
-    deta = db.Column(db.Text)
-    de = db.Column(db.String(300), nullable=False)
-    date_added = db.Column(db.DateTime, default = datetime.utcnow)
-    dreamer_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+Yukarıdaki resimde, projenin başarıyla çalıştırıldığı bir ekran görüntüsü bulunmaktadır.
 
-@app.route("/")
-def home():
-    return render_template("home.html")
+## Yorum ve Güncelleme
 
-@app.route("/register" , methods=["GET" , "POST"])
-def register():
-    
-    if request.method == "POST":
-        name = request.form.get("name")
-        surname = request.form.get("surname")
-        email = request.form.get("email")
-        password = request.form.get("password")
+Projeye katkıda bulunmak istiyorsanız, aşağıda belirtilen adımları takip edebilirsiniz:
 
-        search = Users.query.filter_by(email=email).first()
+- Yeni bir özellik eklemek veya hata düzeltmek için bir güncelleme yapmak istiyorsanız, lütfen önce bir konu (issue) açarak fikirleri tartışın.
+- Ardından, projeyi forklayın, yeni bir dal oluşturun, değişiklikleri commit edin ve birleştirme talebi (Pull Request) oluşturun.
 
-        if search != None:
-            flash("Bu E-Posta İle Hesap Zaten Bulunuyor !!!")
-            return render_template("register.html")
-        new_user = Users(name = name,surname = surname,email = email,password=password)
-        db.session.add(new_user)
-        db.session.commit()          
-        ctypes.windll.user32.MessageBoxW(None, "Kaydolma İşleminiz Başarıyla Tamamlndı Giriş Yap Sayfasına Yönlendiriliyorsunuz ...", "Uyarı", 0x00000000)
-    
-    
+## Katkıda Bulunan
 
+- [Akif Furkan](https://github.com/KorkmazPro28)
 
-        return redirect(url_for("login"))
-    return render_template("register.html")
+## İletişim
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
+Herhangi bir sorunuz veya destek talebiniz varsa, benimle şu e-posta adresi üzerinden iletişime geçebilirsiniz: akiffurkan4321@gmail.com
 
-@app.route("/create")
-def create():
-    return render_template("create.html")
+## Lisans
 
-@app.route("/detail")
-def detail():
-    return render_template("detail.html")
-
-@app.errorhandler(404)
-def eror(e):
-    return render_template("404.html")
-
-if __name__ == "__main__":
-
-
-    app.debug = False
-    app.run(host="0.0.0.0")
-
-
-## Geliştirme sırasında bana yardımcı olabilecek kılavuz kaynaklar
-Yukarıda yazdığım kod
+Şu anda herhangi bir lisans belirlemedik. Ancak, bu durumu daha sonra düşünebiliriz.
