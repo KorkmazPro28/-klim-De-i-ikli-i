@@ -27,7 +27,7 @@ Projeye katkıda bulunmak istiyorsanız, aşağıda belirtilen adımları takip 
 
 ## Katkıda Bulunan
 
-- [Akif Furkan](https://github.com/KorkmazPro28)
+- [Akif Furkan (KorkmazPro28 ) ](https://github.com/KorkmazPro28)
 
 ## İletişim
 
